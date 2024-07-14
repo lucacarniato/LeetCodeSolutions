@@ -17,6 +17,20 @@ set(LIB_SRC_LIST
 set(LIB_NAME "${PROJECT_NAME}Lib")
 add_library(${LIB_NAME} STATIC ${LIB_SRC_LIST})
 
+# Add precompiled headers to speed up compilation
+target_precompile_headers(
+  ${LIB_NAME}
+  PRIVATE
+    <algorithm>
+    <map>
+    <memory>
+    <unordered_map>
+    <set>
+    <string>
+    <unordered_set>
+    <vector>
+)
+
 # Get all .cpp files for the executable
 set(EXECUTABLE_SRC_FILES ${SRC_DIR}/main.cpp)
 
@@ -30,4 +44,5 @@ target_include_directories(${EXC_TARGET_NAME} PUBLIC ${LIB_SRC_LIST})
 
 # group the sources in IDE tree
 source_group("Source Files/arrays" FILES ${ARRAYS_SRC_FILES})
-source_group("Source Files/twopointers" FILES ${TWO_POINTERS_SRC_DIR})
+source_group("Source Files/twopointers" FILES ${TWO_POINTERS_SRC_FILES})
+
