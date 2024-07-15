@@ -6,6 +6,7 @@ file(GLOB ARRAYS_SRC_FILES ${SRC_DIR}/arrays/*.cpp)
 file(GLOB TWO_POINTERS_SRC_FILES ${SRC_DIR}/twopointers/*.cpp)
 file(GLOB LINKED_LIST_SRC_FILES ${SRC_DIR}/linkedlist/*.cpp)
 file(GLOB STACK_SRC_FILES ${SRC_DIR}/stack/*.cpp)
+file(GLOB BIT_MANIPULATION_SRC_FILES ${SRC_DIR}/bitmanipulation/*.cpp)
 
 set(SHARED_INCLUDE_FILES 
   ${SRC_DIR}/shared/ListNode.hpp
@@ -17,7 +18,8 @@ set(LIB_SRC_LIST
   ${TWO_POINTERS_SRC_FILES}
   ${SHARED_INCLUDE_FILES}
   ${LINKED_LIST_SRC_FILES}
-  ${STACK_SRC_FILES})
+  ${STACK_SRC_FILES}
+  ${BIT_MANIPULATION_SRC_FILES})
 
 # Create a static library
 set(LIB_NAME "${PROJECT_NAME}Lib")
@@ -56,4 +58,5 @@ source_group("Source Files/twopointers" FILES ${TWO_POINTERS_SRC_FILES})
 source_group("Source Files/shared" FILES ${SHARED_INCLUDE_FILES})
 source_group("Source Files/linkedlist" FILES ${LINKED_LIST_SRC_FILES})
 source_group("Source Files/stack" FILES ${STACK_SRC_FILES})
+source_group("Source Files/bitmanipulation" FILES ${BIT_MANIPULATION_SRC_FILES})
 
