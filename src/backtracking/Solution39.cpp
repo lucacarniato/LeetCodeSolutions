@@ -1,5 +1,6 @@
 #include <vector>
-#include <string>
+
+using namespace std;
 
 // backtracking
 class Solution39
