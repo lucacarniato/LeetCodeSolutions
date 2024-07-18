@@ -9,6 +9,7 @@ file(GLOB STACK_SRC_FILES ${SRC_DIR}/stack/*.cpp)
 file(GLOB BIT_MANIPULATION_SRC_FILES ${SRC_DIR}/bitmanipulation/*.cpp)
 file(GLOB BACKTRACKING_SRC_FILES ${SRC_DIR}/backtracking/*.cpp)
 file(GLOB DYNAMICPROGRAMMING_SRC_FILES ${SRC_DIR}/dynamicprogramming/*.cpp)
+file(GLOB TREES_SRC_FILES ${SRC_DIR}/trees/*.cpp)
 
 set(SHARED_INCLUDE_FILES 
   ${SRC_DIR}/shared/ListNode.hpp
@@ -23,7 +24,8 @@ set(LIB_SRC_LIST
   ${STACK_SRC_FILES}
   ${BIT_MANIPULATION_SRC_FILES}
   ${BACKTRACKING_SRC_FILES}
-  ${DYNAMICPROGRAMMING_SRC_FILES})
+  ${DYNAMICPROGRAMMING_SRC_FILES}
+  ${TREES_SRC_FILES})
 
 # Create a static library
 set(LIB_NAME "${PROJECT_NAME}Lib")
@@ -65,4 +67,5 @@ source_group("Source Files/stack" FILES ${STACK_SRC_FILES})
 source_group("Source Files/bitmanipulation" FILES ${BIT_MANIPULATION_SRC_FILES})
 source_group("Source Files/backtracking" FILES ${BACKTRACKING_SRC_FILES})
 source_group("Source Files/dynamicprogramming" FILES ${DYNAMICPROGRAMMING_SRC_FILES})
+source_group("Source Files/trees" FILES ${TREES_SRC_FILES})
 
