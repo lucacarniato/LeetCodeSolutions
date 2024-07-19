@@ -1,10 +1,13 @@
-#include "arrays/Solution217.cpp"
+#include "stack/Solution150.cpp"
+
+#include <string>
+#include <vector>
 
 int main()
 {
-    Solution217 solution217;
-    vector<int> test{1, 1, 1, 3, 3, 4, 3, 2, 4, 2};
-    const auto result = solution217.containsDuplicate(test);
+    Solution150 solution;
+    std::vector<std::string> test{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+    const auto result = solution.evalRPN(test);
 
     return 0;
 }
