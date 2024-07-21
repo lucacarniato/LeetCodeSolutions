@@ -1,12 +1,13 @@
-class Solution22 {
+#include <vector>
+class Solution22
+{
 public:
-    vector<string> generateParenthesis(int n)
+    std::vector<std::string> generateParenthesis(int n)
     {
-
-        vector<string> results{"()"};
+        std::vector<std::string> results{"()"};
         for (int i = 2; i <= n; ++i)
         {
-            std::unordered_set<string> newResults;
+            std::unordered_set<std::string> newResults;
             for (const auto& r : results)
             {
                 for (int j = 0; j < r.size(); ++j)
