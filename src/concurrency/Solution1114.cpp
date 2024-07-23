@@ -1,13 +1,18 @@
 #include <condition_variable>
+#include <functional>
 #include <mutex>
 
-class Foo {
+using namespace std;
+
+class Foo
+{
 public:
-    Foo() {
-        
+    Foo()
+    {
     }
 
-    void first(function<void()> printFirst) {
+    void first(function<void()> printFirst)
+    {
         std::scoped_lock lock{m_};
         // printFirst() outputs "first". Do not change or remove this line.
         printFirst();
@@ -15,18 +20,22 @@ public:
         first_condition_variable_.notify_one();
     }
 
-    void second(function<void()> printSecond) {
+    void second(function<void()> printSecond)
+    {
         std::unique_lock lock{m_};
-        first_condition_variable_.wait(lock, [this] { return firstCalled; });
+        first_condition_variable_.wait(lock, [this]
+                                       { return firstCalled; });
         // printSecond() outputs "second". Do not change or remove this line.
         printSecond();
         secondCalled = true;
         second_condition_variable_.notify_one();
     }
 
-    void third(function<void()> printThird) {
+    void third(function<void()> printThird)
+    {
         std::unique_lock lock{m_};
-        second_condition_variable_.wait(lock, [this] { return secondCalled; });
+        second_condition_variable_.wait(lock, [this]
+                                        { return secondCalled; });
         // printThird() outputs "third". Do not change or remove this line.
         printThird();
     }
@@ -38,5 +47,4 @@ private:
     bool thirdCalled = false;
     std::condition_variable first_condition_variable_;
     std::condition_variable second_condition_variable_;
-
 };
