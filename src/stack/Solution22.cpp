@@ -36,7 +36,7 @@ public:
 class Solution22Second
 {
 
-    void backtrack(int no, int nc, int nump, int imb, std::string current, std::vector<std::string>& result)
+    void backtrack(int no, int nc, int nump, std::string current, std::vector<std::string>& result)
     {
         if (no == nump && nc == nump)
         {
@@ -50,12 +50,12 @@ class Solution22Second
         {
             return;
         }
-        if (imb < 0)
+        if (no < nc)
         {
             return;
         }
-        backtrack(no + 1, nc, nump, imb + 1, current + "(", result);
-        backtrack(no, nc + 1, nump, imb - 1, current + ")", result);
+        backtrack(no + 1, nc, nump, current + "(", result);
+        backtrack(no, nc + 1, nump, current + ")", result);
     }
 
 public:
@@ -64,8 +64,7 @@ public:
 
         std::string current;
         std::vector<std::string> result;
-        int imb = 0;
-        backtrack(0, 0, n, imb, current, result);
+        backtrack(0, 0, n, current, result);
         return result;
     }
 };
