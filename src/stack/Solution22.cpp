@@ -1,4 +1,7 @@
+#include <string>
+#include <unordered_set>
 #include <vector>
+
 class Solution22
 {
 public:
@@ -27,5 +30,42 @@ public:
             results.assign(newResults.begin(), newResults.end());
         }
         return results;
+    }
+};
+
+class Solution22Second
+{
+
+    void backtrack(int no, int nc, int nump, int imb, std::string current, std::vector<std::string>& result)
+    {
+        if (no == nump && nc == nump)
+        {
+            result.push_back(current);
+        }
+        if (no > nump)
+        {
+            return;
+        }
+        if (nc > nump)
+        {
+            return;
+        }
+        if (imb < 0)
+        {
+            return;
+        }
+        backtrack(no + 1, nc, nump, imb + 1, current + "(", result);
+        backtrack(no, nc + 1, nump, imb - 1, current + ")", result);
+    }
+
+public:
+    std::vector<std::string> generateParenthesis(int n)
+    {
+
+        std::string current;
+        std::vector<std::string> result;
+        int imb = 0;
+        backtrack(0, 0, n, imb, current, result);
+        return result;
     }
 };
