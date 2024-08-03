@@ -4,8 +4,6 @@ using namespace std;
 
 class Solution139
 {
-    static int constexpr alphabetSize{26};
-
     struct TrieNode
     {
         explicit TrieNode()
@@ -38,8 +36,6 @@ class Solution139
             p->isWordEnd_ = true;
         }
     };
-
-    std::vector<bool> failed_;
 
     bool searchWord(const TrieNode* root, const std::string& s, int index)
     {
@@ -77,6 +73,9 @@ class Solution139
 
         return false;
     }
+
+    std::vector<bool> failed_;
+    static int constexpr alphabetSize{26};
 
 public:
     bool wordBreak(string s, vector<string>& wordDict)
