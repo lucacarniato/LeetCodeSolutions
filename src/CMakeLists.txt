@@ -16,7 +16,8 @@ file(GLOB TRIE_SRC_FILES ${SRC_DIR}/trie/*.cpp)
 
 set(SHARED_INCLUDE_FILES 
   ${SRC_DIR}/shared/ListNode.hpp
-  ${SRC_DIR}/shared/TreeNode.hpp)
+  ${SRC_DIR}/shared/TreeNode.hpp
+  ${SRC_DIR}/shared/TrieNode.hpp)
 
 # Combine all source files into a single list for the library
 set(LIB_SRC_LIST

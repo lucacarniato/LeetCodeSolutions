@@ -6,7 +6,7 @@ class Solution139
 {
     struct TrieNode
     {
-        explicit TrieNode()
+        TrieNode()
         {
             childrens_.resize(alphabetSize);
             for (auto i = 0; i < alphabetSize; ++i)
@@ -14,9 +14,6 @@ class Solution139
                 childrens_[i] = nullptr;
             }
         }
-
-        std::vector<TrieNode*> childrens_;
-        bool isWordEnd_ = false;
 
         static void insert(TrieNode* root, const std::string& key)
         {
@@ -35,6 +32,10 @@ class Solution139
 
             p->isWordEnd_ = true;
         }
+
+        std::vector<TrieNode*> childrens_;
+        bool isWordEnd_ = false;
+        static int constexpr alphabetSize{26};
     };
 
     bool searchWord(const TrieNode* root, const std::string& s, int index)
@@ -75,7 +76,6 @@ class Solution139
     }
 
     std::vector<bool> failed_;
-    static int constexpr alphabetSize{26};
 
 public:
     bool wordBreak(string s, vector<string>& wordDict)
