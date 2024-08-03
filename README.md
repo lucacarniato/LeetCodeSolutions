@@ -8,7 +8,7 @@ This repository contains LeetCode solutions for several problems. The solutions 
 
 The build requirements are:
 
-- CMake 3.19.3 or higher
+- CMake 3.23 or higher
 - A C++17 compatible compiler
 
 Linux
