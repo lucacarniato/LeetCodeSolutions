@@ -1,13 +1,10 @@
-#include "stack/Solution150.cpp"
-
-#include <string>
-#include <vector>
+#include "stack/Solution41.cpp"
 
 int main()
 {
-    Solution150 solution;
-    std::vector<std::string> test{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
-    const auto result = solution.evalRPN(test);
+    Solution41 solution;
+    std::vector<int> inputs{73, 74, 75, 71, 69, 72, 76, 73};
+    const auto result = solution.dailyTemperatures(inputs);
 
     return 0;
 }
