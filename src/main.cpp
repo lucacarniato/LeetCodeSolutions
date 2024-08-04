@@ -1,8 +1,8 @@
-#include "stack/Solution41.cpp"
+#include "stack/Solution749.cpp"
 
 int main()
 {
-    Solution41 solution;
+    Solution749 solution;
     std::vector<int> inputs{73, 74, 75, 71, 69, 72, 76, 73};
     const auto result = solution.dailyTemperatures(inputs);
 
