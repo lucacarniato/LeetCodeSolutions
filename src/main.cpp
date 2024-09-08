@@ -1,10 +1,16 @@
-#include "stack/Solution749.cpp"
+#include "binarytrees/Solution543.cpp"
 
 int main()
 {
-    Solution749 solution;
-    std::vector<int> inputs{73, 74, 75, 71, 69, 72, 76, 73};
-    const auto result = solution.dailyTemperatures(inputs);
+    TreeNode* r = new TreeNode(1);
+    r->left = new TreeNode(2);
+    r->right = new TreeNode(3);
+
+    r->left->left = new TreeNode(4);
+    r->left->right = new TreeNode(5);
+
+    Solution543 solution;
+    int result = solution.diameterOfBinaryTree(r);
 
     return 0;
 }

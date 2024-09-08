@@ -13,7 +13,7 @@ file(GLOB TREES_SRC_FILES ${SRC_DIR}/trees/*.cpp)
 file(GLOB CONCURRENCY_SRC_FILES ${SRC_DIR}/concurrency/*.cpp)
 file(GLOB TRIE_SRC_FILES ${SRC_DIR}/trie/*.cpp)
 file(GLOB BINARY_SEARCH_SRC_FILES ${SRC_DIR}/binarysearch/*.cpp)
-
+file(GLOB BINARY_TREES ${SRC_DIR}/binarytrees/*.cpp)
 
 set(SHARED_INCLUDE_FILES 
   ${SRC_DIR}/shared/ListNode.hpp
@@ -33,7 +33,8 @@ set(LIB_SRC_LIST
   ${TREES_SRC_FILES}
   ${CONCURRENCY_SRC_FILES}
   ${TRIE_SRC_FILES}
-  ${BINARY_SEARCH_SRC_FILES})
+  ${BINARY_SEARCH_SRC_FILES}
+  ${BINARY_TREES})
 
 # Create a static library
 set(LIB_NAME "${PROJECT_NAME}Lib")
@@ -79,4 +80,7 @@ source_group("Source Files/trees" FILES ${TREES_SRC_FILES})
 source_group("Source Files/concurrency" FILES ${CONCURRENCY_SRC_FILES})
 source_group("Source Files/trie" FILES ${TRIE_SRC_FILES})
 source_group("Source Files/binarysearch" FILES ${BINARY_SEARCH_SRC_FILES})
+source_group("Source Files/binarytrees" FILES ${BINARY_TREES})
+
+
 
