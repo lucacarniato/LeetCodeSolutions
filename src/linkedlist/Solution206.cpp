@@ -13,11 +13,10 @@ public:
         }
 
         ListNode* pn = nullptr;
-        ListNode* nn = nullptr;
         ListNode* cn = head;
         while (cn)
         {
-            nn = cn->next;
+            ListNode* nn = cn->next;
             cn->next = pn;
             pn = cn;
             cn = nn;

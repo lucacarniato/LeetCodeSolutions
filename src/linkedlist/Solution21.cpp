@@ -14,7 +14,7 @@ public:
         ListNode* next = nullptr;
         while (cn1 != nullptr || cn2 != nullptr)
         {
-            ListNode* next_node = nullptr;
+            ListNode* next_node;
             if (cn1 == nullptr)
             {
                 next_node = new ListNode(cn2->val);

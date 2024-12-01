@@ -22,9 +22,11 @@ public:
 
         // Second list
         ListNode* sl = sp->next;
+
         // First list
         sp->next = nullptr;
 
+        // reverse second list
         ListNode* pn = nullptr;
         while (sl)
         {
@@ -34,6 +36,7 @@ public:
             sl = nn;
         }
 
+        // re-connect
         ListNode* fl = head;
         sl = pn;
         while (sl)
