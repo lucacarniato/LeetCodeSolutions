@@ -1,23 +1,21 @@
-#include "binarytrees/Solution230.cpp"
+#include "binarytrees/Solution105.cpp"
 #include "shared/TreeNode.hpp"
+#include <vector>
 
 int main()
 {
-    auto* r0 = new TreeNode(5);
-    auto* r1 = new TreeNode(3);
-    auto* r2 = new TreeNode(6);
-    auto* r3 = new TreeNode(4);
-    auto* r4 = new TreeNode(2);
-    auto* r5 = new TreeNode(1);
+    auto* r0 = new TreeNode(1);
+    auto* r1 = new TreeNode(2);
+    auto* r2 = new TreeNode(3);
 
     r0->left = r1;
-    r0->right = r2;
-    r1->right = r3;
-    r1->left = r4;
-    r4->left = r5;
+    r1->right = r2;
 
-    Solution230 solution;
-    auto result = solution.kthSmallest(r0, 3);
+    Solution105 solution;
+    std::vector<int> preorder{3, 9, 20, 15, 7};
+    std::vector<int> inorder{9, 3, 15, 20, 7};
+
+    auto result = solution.buildTree(preorder, inorder);
 
     return 0;
 }
