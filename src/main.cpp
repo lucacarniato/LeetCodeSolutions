@@ -1,21 +1,13 @@
-#include "binarytrees/Solution105.cpp"
 #include "shared/TreeNode.hpp"
+#include "sliding_window/Solution121.cpp"
 #include <vector>
 
 int main()
 {
-    auto* r0 = new TreeNode(1);
-    auto* r1 = new TreeNode(2);
-    auto* r2 = new TreeNode(3);
+    Solution121 solution;
+    std::vector<int> prices{7, 1, 5, 3, 6, 4};
 
-    r0->left = r1;
-    r1->right = r2;
-
-    Solution105 solution;
-    std::vector<int> preorder{3, 9, 20, 15, 7};
-    std::vector<int> inorder{9, 3, 15, 20, 7};
-
-    auto result = solution.buildTree(preorder, inorder);
+    auto result = solution.maxProfit(prices);
 
     return 0;
 }
