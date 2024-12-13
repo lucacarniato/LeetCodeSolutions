@@ -1,4 +1,7 @@
+#include <queue>
+#include <string>
 #include <unordered_set>
+#include <vector>
 
 class Solution3Second
 {
