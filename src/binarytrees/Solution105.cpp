@@ -1,10 +1,55 @@
-#include <ios>
-using namespace std;
 #include "../shared/TreeNode.hpp"
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 class Solution105
+{
+    TreeNode* build(vector<int>& preorder, vector<int>& inorder, int spr, int epr, int sin, int ein)
+    {
+        if (spr > epr || sin > ein)
+        {
+            return nullptr;
+        }
+
+        TreeNode* root = new TreeNode(preorder[spr]);
+
+        auto it = std::find(inorder.begin() + sin, inorder.begin() + ein + 1, preorder[spr]);
+        if (it == inorder.end())
+            return nullptr;
+
+        int inorderIndex = std::distance(inorder.begin(), it);
+        int numLeft = inorderIndex - sin;
+
+        root->left = build(preorder,
+                           inorder,
+                           spr + 1,
+                           spr + numLeft,
+                           sin,
+                           inorderIndex - 1);
+
+        root->right = build(preorder,
+                            inorder,
+                            spr + numLeft + 1,
+                            epr,
+                            inorderIndex + 1,
+                            ein);
+
+        return root;
+    }
+
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
+    {
+        int epr = preorder.size() - 1;
+        int ein = inorder.size() - 1;
+
+        return build(preorder, inorder, 0, epr, 0, ein);
+    }
+};
+
+class Solution105Second
 {
     std::unordered_map<int, int> inordermap_;
 
