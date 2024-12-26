@@ -5,7 +5,11 @@ using namespace std;
 // backtracking
 class Solution39
 {
-    void f(vector<int>& candidates, vector<vector<int>>& res, vector<int>& subset, int index, int target)
+    void f(vector<int>& candidates,
+           vector<vector<int>>& res,
+           vector<int>& subset,
+           int index,
+           int target)
     {
         if (target == 0)
         {
