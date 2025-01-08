@@ -7,9 +7,6 @@ class Solution23
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists)
     {
-        ListNode* result = nullptr;
-        ListNode* cnResult = nullptr;
-
         auto cmp = [](ListNode* a, ListNode* b)
         {
             return a->val > b->val;
@@ -25,29 +22,22 @@ public:
             pq.emplace(lists[i]);
         }
 
+        ListNode dummy;
+        ListNode* tail = &dummy;
+
         while (!pq.empty())
         {
             const auto cn = pq.top();
-            const auto val = cn->val;
-            const auto cnn = cn->next;
             pq.pop();
 
-            if (cnn)
-            {
-                pq.push(cnn);
-            }
+            tail->next = cn;
+            tail = tail->next;
 
-            if (result == nullptr)
+            if (cn->next)
             {
-                result = new ListNode(val);
-                cnResult = result;
-            }
-            else
-            {
-                cnResult->next = new ListNode(val);
-                cnResult = cnResult->next;
+                pq.push(cn->next);
             }
         }
-        return result;
+        return dummy.next;
     }
 };
