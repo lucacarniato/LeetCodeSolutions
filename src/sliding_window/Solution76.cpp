@@ -1,6 +1,7 @@
 #include <array>
 #include <queue>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -9,7 +10,62 @@ class Solution76
 public:
     string minWindow(string s, string t)
     {
-        if (s.size() < t.size())
+        if (t.empty() || s.empty() || s.size() < t.size())
+        {
+            return "";
+        }
+
+        std::unordered_map<char, int> tFreq;
+        for (int i = 0; i < t.size(); ++i)
+        {
+            tFreq[t[i]]++;
+        }
+        const auto numberOfMatchesToAchive = tFreq.size();
+
+        std::unordered_map<char, int> sFreq;
+        size_t l = 0;
+        size_t matchesSoFar = 0;
+        size_t maxStringSize = static_cast<size_t>(1e6);
+        size_t currentMinStringSize = maxStringSize;
+        size_t pos = 0;
+
+        for (int i = 0; i < s.size(); ++i)
+        {
+
+            sFreq[s[i]]++;
+            if (tFreq.contains(s[i]) && sFreq[s[i]] == tFreq[s[i]])
+            {
+                matchesSoFar++;
+            }
+
+            while (matchesSoFar == numberOfMatchesToAchive)
+            {
+                size_t currentSubStringLength = i - l + 1;
+                if (currentSubStringLength < currentMinStringSize)
+                {
+                    currentMinStringSize = currentSubStringLength;
+                    pos = l;
+                }
+
+                sFreq[s[l]]--;
+                if (tFreq.contains(s[l]) && sFreq[s[l]] < tFreq[s[l]])
+                {
+                    matchesSoFar--;
+                }
+                l++;
+            }
+        }
+
+        return currentMinStringSize == maxStringSize ? "" : s.substr(pos, currentMinStringSize);
+    }
+};
+
+class Solution76Second
+{
+public:
+    string minWindow(string s, string t)
+    {
+        if (t.empty() || s.empty() || s.size() < t.size())
         {
             return "";
         }
@@ -53,7 +109,7 @@ public:
 
             if (matchesSoFar == numberOfMatchesToAchive)
             {
-                while (sFreq[s[q.front()]] > tFreq[s[q.front()]])
+                while (!q.empty() && sFreq[s[q.front()]] > tFreq[s[q.front()]])
                 {
                     sFreq[s[q.front()]]--;
                     q.pop();
