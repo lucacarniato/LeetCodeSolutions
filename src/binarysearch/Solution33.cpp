@@ -13,31 +13,36 @@ public:
         while (l <= r)
         {
             int mid = (l + r) / 2;
-            if (nums[mid] == t)
+            int midv = nums[mid];
+            if (midv == t)
             {
                 return mid;
             }
 
             int lv = nums[l];
             int rv = nums[r];
-            int midv = nums[mid];
+            if (midv >= lv)
+            {
+                if (t >= lv && t < midv)
+                {
+                    r = mid - 1;
+                }
+                else
+                {
+                    l = mid + 1;
+                }
+            }
 
-            if (midv >= lv && (t >= lv && t <= midv))
+            if (rv >= midv)
             {
-                r = mid - 1;
-            }
-            if (midv >= lv && !(t >= lv && t <= midv))
-            {
-                l = mid + 1;
-            }
-
-            if (rv >= midv && (t >= midv && t <= rv))
-            {
-                l = mid + 1;
-            }
-            if (rv >= midv && !(t >= midv && t <= rv))
-            {
-                r = mid - 1;
+                if (t > midv && t <= rv)
+                {
+                    l = mid + 1;
+                }
+                else
+                {
+                    r = mid - 1;
+                }
             }
         }
         return -1;
