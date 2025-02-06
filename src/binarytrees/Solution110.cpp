@@ -4,30 +4,30 @@ using namespace std;
 
 class Solution110
 {
+    bool isBalancedTree = true;
 
-    bool isBalanced = true;
-
-    int IsBalanced(TreeNode* r)
+    int ComputeHeight(TreeNode* root)
     {
-        if (!r)
+        if (!root)
         {
             return 0;
         }
-        const int left = IsBalanced(r->left);
-        const int right = IsBalanced(r->right);
-        const int absDiff = std::abs(left - right);
-        if (absDiff > 1)
+        if (!isBalancedTree)
         {
-            isBalanced = false;
             return 0;
         }
-        return 1 + max(left, right);
+
+        int leftHeight = ComputeHeight(root->left);
+        int rightHeight = ComputeHeight(root->right);
+        isBalancedTree = isBalancedTree && std::abs(rightHeight - leftHeight) <= 1;
+
+        return 1 + std::max(leftHeight, rightHeight);
     }
 
 public:
-    int diameterOfBinaryTree(TreeNode* r)
+    bool isBalanced(TreeNode* root)
     {
-        IsBalanced(r);
-        return isBalanced;
-    };
+        ComputeHeight(root);
+        return isBalancedTree;
+    }
 };

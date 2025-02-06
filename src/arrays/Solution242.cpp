@@ -21,13 +21,7 @@ public:
     {
         const auto sf = computeFrequencies(s);
         const auto st = computeFrequencies(t);
-        for (int i = 0; i < sf.size(); ++i)
-        {
-            if (sf[i] != st[i])
-            {
-                return false;
-            }
-        }
-        return true;
+        
+        return sf == st;
     }
 };

@@ -29,6 +29,7 @@ public:
     {
         vector<vector<int>> res;
         vector<int> pSet;
+        sort(candidates.begin(), candidates.end());
         subsets(candidates, res, pSet, 0, target);
         return res;
     }

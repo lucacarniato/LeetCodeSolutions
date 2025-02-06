@@ -3,19 +3,20 @@ using namespace std;
 
 class Solution226
 {
-
-    void invert(TreeNode* r)
+    void invert(TreeNode* root)
     {
-        if (!r)
+        if (!root)
         {
             return;
         }
 
-        const auto tmp = r->left;
-        r->left = r->right;
-        r->right = tmp;
-        invert(r->left);
-        invert(r->right);
+        auto l = root->left;
+        auto r = root->right;
+        root->left = r;
+        root->right = l;
+
+        invert(root->left);
+        invert(root->right);
     }
 
 public:
