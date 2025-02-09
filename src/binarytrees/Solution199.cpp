@@ -7,7 +7,7 @@ class Solution199
 public:
     vector<int> rightSideView(TreeNode* root)
     {
-        vector<int> result;
+        std::vector<int> result;
         if (!root)
         {
             return result;
@@ -15,30 +15,21 @@ public:
 
         std::queue<TreeNode*> q;
         q.push(root);
-
         while (!q.empty())
         {
             const auto size = q.size();
-
-            int val;
+            result.push_back(q.back()->val);
             for (int i = 0; i < size; ++i)
             {
-                const auto v = q.front();
+                const auto n = q.front();
                 q.pop();
 
-                val = v->val;
-                if (v->left)
-                {
-                    q.push(v->left);
-                }
-                if (v->right)
-                {
-                    q.push(v->right);
-                }
+                if (n->left)
+                    q.emplace(n->left);
+                if (n->right)
+                    q.emplace(n->right);
             }
-            result.push_back(val);
         }
-
         return result;
     }
 };

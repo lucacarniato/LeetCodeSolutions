@@ -40,31 +40,35 @@ class Solution102Second
 public:
     vector<vector<int>> levelOrder(TreeNode* root)
     {
-
         vector<vector<int>> result;
         if (!root)
-            return result;
-
-        std::queue<TreeNode*> nodeQueue;
-        nodeQueue.push(root);
-
-        while (!nodeQueue.empty())
         {
-            int numNodes = nodeQueue.size();
-            vector<int> level;
+            return result;
+        }
 
-            for (int i = 0; i < numNodes; ++i)
+        std::queue<std::tuple<int, TreeNode*>> q;
+        q.emplace(0, root);
+
+        while (!q.empty())
+        {
+            const auto [level, n] = q.front();
+            q.pop();
+
+            if (result.size() <= level)
             {
-                auto currentNode = nodeQueue.front();
-                nodeQueue.pop();
-                level.push_back(currentNode->val);
-
-                if (currentNode->left)
-                    nodeQueue.push(currentNode->left);
-                if (currentNode->right)
-                    nodeQueue.push(currentNode->right);
+                result.emplace_back();
             }
-            result.push_back(level);
+
+            result[level].push_back(n->val);
+
+            if (n->left)
+            {
+                q.emplace(level + 1, n->left);
+            }
+            if (n->right)
+            {
+                q.emplace(level + 1, n->right);
+            }
         }
         return result;
     }

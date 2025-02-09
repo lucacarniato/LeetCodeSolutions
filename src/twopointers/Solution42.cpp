@@ -15,17 +15,17 @@ public:
         int result = 0;
         while (l < r)
         {
-            if (maxl <= maxr)
+            if (maxl < maxr)
             {
-                result = std::max(height[l] - maxl, 0);
                 l++;
                 maxl = std::max(maxl, height[l]);
+                result += maxl - height[l];
             }
             else
             {
-                result = std::max(height[r] - maxr, 0);
                 r--;
                 maxr = std::max(maxr, height[r]);
+                result += maxr - height[r];
             }
         }
         return result;

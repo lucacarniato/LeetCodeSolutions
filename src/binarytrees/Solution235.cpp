@@ -4,16 +4,12 @@ using namespace std;
 
 class Solution235
 {
-public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+    TreeNode* findLCA(TreeNode* root, const int& minVal, const int& maxVal)
     {
         if (!root)
         {
             return root;
         }
-
-        int minVal = std::min(p->val, q->val);
-        int maxVal = std::max(p->val, q->val);
 
         if (root->val >= minVal && root->val <= maxVal)
         {
@@ -21,8 +17,16 @@ public:
         }
         if (root->val < minVal)
         {
-            return lowestCommonAncestor(root->right, p, q);
+            return findLCA(root->right, minVal, maxVal);
         }
-        return lowestCommonAncestor(root->left, p, q);
+        return findLCA(root->left, minVal, maxVal);
+    }
+
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+    {
+        int minVal = std::min(p->val, q->val);
+        int maxVal = std::max(p->val, q->val);
+        return findLCA(root, minVal, maxVal);
     }
 };

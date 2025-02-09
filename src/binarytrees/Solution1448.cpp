@@ -4,32 +4,36 @@ using namespace std;
 
 class Solution1448
 {
-
-    void traverse(TreeNode* r, int rootval, int pval, int& num)
+    void traverse(TreeNode* root, int rootVal, int& counter)
     {
-        if (!r)
+        if (!root)
         {
             return;
         }
 
-        int newpval = std::max(pval, r->val);
-        traverse(r->left, rootval, newpval, num);
-        if (r->val >= rootval && r->val >= pval)
+        if (root->val >= rootVal)
         {
-            num = num + 1;
+            counter++;
         }
-        traverse(r->right, rootval, newpval, num);
+        if (root->left)
+        {
+            traverse(root->left, std::max(rootVal, root->left->val), counter);
+        }
+        if (root->right)
+        {
+            traverse(root->right, std::max(rootVal, root->right->val), counter);
+        }
     }
 
 public:
     int goodNodes(TreeNode* root)
     {
-        int num = 0;
         if (!root)
         {
-            return num;
+            return 0;
         }
-        traverse(root, root->val, -10e5, num);
-        return num;
+        int counter = 0;
+        traverse(root, root->val, counter);
+        return counter;
     }
 };
