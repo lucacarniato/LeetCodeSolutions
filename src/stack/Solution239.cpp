@@ -8,7 +8,7 @@ class MyQueue232
 
     void transfer()
     {
-        if (pop_stack_.empty()) // Move only if pop_stack_ is empty
+        if (pop_stack_.empty())
         {
             while (!push_stack_.empty())
             {
