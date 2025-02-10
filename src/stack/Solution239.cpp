@@ -1,5 +1,4 @@
 #include <stack>
-#include <vector>
 
 class MyQueue232
 {
