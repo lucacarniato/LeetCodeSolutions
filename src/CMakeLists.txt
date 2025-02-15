@@ -10,6 +10,7 @@ file(GLOB SLIDING_WINDOW ${SRC_DIR}/sliding_window/*.cpp)
 file(GLOB BIT_MANIPULATION_SRC_FILES ${SRC_DIR}/bitmanipulation/*.cpp)
 file(GLOB BACKTRACKING_SRC_FILES ${SRC_DIR}/backtracking/*.cpp)
 file(GLOB DYNAMICPROGRAMMING_SRC_FILES ${SRC_DIR}/dynamicprogramming/*.cpp)
+file(GLOB DYNAMICPROGRAMMING_2D_SRC_FILES ${SRC_DIR}/dynamicprogramming/2d/*.cpp)
 file(GLOB TREES_SRC_FILES ${SRC_DIR}/trees/*.cpp)
 file(GLOB CONCURRENCY_SRC_FILES ${SRC_DIR}/concurrency/*.cpp)
 file(GLOB TRIE_SRC_FILES ${SRC_DIR}/trie/*.cpp)
@@ -33,6 +34,7 @@ set(LIB_SRC_LIST
   ${BIT_MANIPULATION_SRC_FILES}
   ${BACKTRACKING_SRC_FILES}
   ${DYNAMICPROGRAMMING_SRC_FILES}
+  ${DYNAMICPROGRAMMING_2D_SRC_FILES}
   ${TREES_SRC_FILES}
   ${CONCURRENCY_SRC_FILES}
   ${TRIE_SRC_FILES}
@@ -81,6 +83,7 @@ source_group("Source Files/sliding_window" FILES ${SLIDING_WINDOW})
 source_group("Source Files/bitmanipulation" FILES ${BIT_MANIPULATION_SRC_FILES})
 source_group("Source Files/backtracking" FILES ${BACKTRACKING_SRC_FILES})
 source_group("Source Files/dynamicprogramming" FILES ${DYNAMICPROGRAMMING_SRC_FILES})
+source_group("Source Files/dynamicprogramming_2d" FILES ${DYNAMICPROGRAMMING_2D_SRC_FILES})
 source_group("Source Files/trees" FILES ${TREES_SRC_FILES})
 source_group("Source Files/concurrency" FILES ${CONCURRENCY_SRC_FILES})
 source_group("Source Files/trie" FILES ${TRIE_SRC_FILES})
