@@ -17,19 +17,21 @@ public:
 
         while (r > l)
         {
-
-            int tofind = target - numbers[l];
-            while (r > l && numbers[r] > tofind)
-            {
-                r--;
-            }
-
-            if (numbers[r] == tofind)
+            int sum = numbers[r] + numbers[l];
+            if (sum == target)
             {
                 result = vector<int>{l + 1, r + 1};
                 break;
             }
-            l++;
+
+            if (sum > target)
+            {
+                r--;
+            }
+            else
+            {
+                l++;
+            }
         }
 
         return result;

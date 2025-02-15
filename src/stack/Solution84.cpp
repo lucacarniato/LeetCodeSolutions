@@ -8,16 +8,16 @@ public:
     {
         std::stack<int> s;
         int result = 0;
-        const auto n = heights.size();
-        for (int i = 0; i <= n; ++i)
+        for (int i = 0; i <= heights.size(); ++i)
         {
-            const auto currentHeight = i < n ? heights[i] : 0;
-            while (!s.empty() && currentHeight < heights[s.top()])
+            const auto h = i == heights.size() ? 0 : heights[i];
+
+            while (!s.empty() && h < heights[s.top()])
             {
-                const auto h = heights[s.top()];
+                int rectangle_height = heights[s.top()];
                 s.pop();
-                const auto w = s.empty() ? i : i - s.top() - 1;
-                result = std::max(result, w * h);
+                int rectangle_width = s.empty() ? i : i - s.top() - 1;
+                result = std::max(result, rectangle_height * rectangle_width);
             }
             s.push(i);
         }

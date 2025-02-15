@@ -18,10 +18,11 @@ public:
         while (!q.empty())
         {
             const auto size = q.size();
-            result.push_back(q.back()->val);
+            int val = 0;
             for (int i = 0; i < size; ++i)
             {
                 const auto n = q.front();
+                val = n->val;
                 q.pop();
 
                 if (n->left)
@@ -29,6 +30,7 @@ public:
                 if (n->right)
                     q.emplace(n->right);
             }
+            result.push_back(val);
         }
         return result;
     }

@@ -4,30 +4,33 @@ using namespace std;
 
 class Solution230
 {
-    void Extract(TreeNode* root, int k, int& currentK, int& result)
+    int results_;
+    int counter_ = 0;
+
+    void traverse(TreeNode* r, int k)
     {
-        if (!root)
+        if (!r)
+        {
+            return;
+        }
+        if (counter_ >= k)
         {
             return;
         }
 
-        Extract(root->left, k, currentK, result);
-
-        currentK = currentK + 1;
-        if (currentK == k)
+        traverse(r->left, k);
+        if (counter_ + 1 == k)
         {
-            result = root->val;
-            return;
+            results_ = r->val;
         }
-        Extract(root->right, k, currentK, result);
+        counter_++;
+        traverse(r->right, k);
     }
 
 public:
     int kthSmallest(TreeNode* root, int k)
     {
-        int result = -1;
-        int currentK = 0;
-        Extract(root, k, currentK, result);
-        return result;
+        traverse(root, k);
+        return results_;
     }
 };

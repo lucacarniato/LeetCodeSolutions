@@ -33,8 +33,8 @@ public:
     vector<string> generateParenthesis(int n)
     {
         vector<string> result;
-        std::string val{"("};
-        backtrack(result, val, 0, 1, n);
+        std::string val;
+        backtrack(result, val, 0, 0, n);
         return result;
     }
 };

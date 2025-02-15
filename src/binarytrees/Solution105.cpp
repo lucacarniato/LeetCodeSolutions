@@ -6,46 +6,62 @@ using namespace std;
 
 class Solution105
 {
-    TreeNode* build(vector<int>& preorder, vector<int>& inorder, int spr, int epr, int sin, int ein)
+    std::unordered_map<int, int> inorder_maps_;
+
+    TreeNode* f(
+        const vector<int>& preorder,
+        const vector<int>& inorder,
+        int preorder_index,
+        int inorder_start,
+        int inorder_end,
+        int postorder_start,
+        int postorder_end)
     {
-        if (spr > epr || sin > ein)
+        if (inorder_start > inorder_end || postorder_start > postorder_end)
         {
             return nullptr;
         }
 
-        TreeNode* root = new TreeNode(preorder[spr]);
-
-        auto it = std::find(inorder.begin() + sin, inorder.begin() + ein + 1, preorder[spr]);
-        if (it == inorder.end())
+        if (preorder_index >= preorder.size())
+        {
             return nullptr;
+        }
 
-        int inorderIndex = std::distance(inorder.begin(), it);
-        int numLeft = inorderIndex - sin;
+        const auto v = preorder[preorder_index];
+        TreeNode* result = new TreeNode(v);
+        const auto node_index = inorder_maps_[v];
+        int left_tree_size = node_index - inorder_start;
 
-        root->left = build(preorder,
-                           inorder,
-                           spr + 1,
-                           spr + numLeft,
-                           sin,
-                           inorderIndex - 1);
+        result->left = f(
+            preorder,
+            inorder,
+            preorder_index + 1,
+            inorder_start,
+            node_index - 1,
+            preorder_index + 1,
+            preorder_index + left_tree_size);
 
-        root->right = build(preorder,
-                            inorder,
-                            spr + numLeft + 1,
-                            epr,
-                            inorderIndex + 1,
-                            ein);
+        result->right = f(
+            preorder,
+            inorder,
+            preorder_index + 1 + left_tree_size,
+            node_index + 1,
+            inorder_end,
+            preorder_index + left_tree_size + 1,
+            postorder_end);
 
-        return root;
+        return result;
     }
 
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
     {
-        int epr = preorder.size() - 1;
-        int ein = inorder.size() - 1;
-
-        return build(preorder, inorder, 0, epr, 0, ein);
+        for (int i = 0; i < inorder.size(); ++i)
+        {
+            const auto v = inorder[i];
+            inorder_maps_[v] = i;
+        }
+        return f(preorder, inorder, 0, 0, preorder.size(), 0, preorder.size());
     }
 };
 
