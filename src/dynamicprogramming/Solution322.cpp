@@ -7,32 +7,66 @@ class Solution322
 public:
     int coinChange(vector<int>& coins, int amount)
     {
-        vector<vector<int>> dp(coins.size() + 1, vector<int>(amount + 1));
-        // 1st initialization
-        for (int i = 0; i <= coins.size(); i++)
-            dp[i][0] = 0;
-        for (int j = 0; j <= amount; j++)
-            dp[0][j] = INT_MAX - 1;
-        // 2nd row initialization
-        for (int j = 1; j <= amount; j++)
-            if (j % coins[0] == 0)
-                dp[1][j] = j / coins[0];
-            else
-                dp[1][j] = INT_MAX - 1;
-        // unbounded knapsack code
-        for (int i = 2; i <= coins.size(); i++)
+        std::vector<int> solutions(amount + 1, amount + 1);
+        solutions[0] = 0;
+        for (int i = 1; i <= amount; ++i)
         {
-            for (int j = 1; j <= amount; j++)
+            for (const auto& c : coins)
             {
-                if (coins[i - 1] <= j)
-                    dp[i][j] = min(1 + dp[i][j - coins[i - 1]], dp[i - 1][j]);
-                else
-                    dp[i][j] = dp[i - 1][j];
+                const int target = i - c;
+                if (target >= 0)
+                {
+                    solutions[i] = std::min(solutions[i], 1 + solutions[target]);
+                }
             }
         }
-        // if answer is possible or not
-        if (dp[coins.size()][amount] == INT_MAX - 1)
-            return -1;
-        return dp[coins.size()][amount];
+        return solutions[amount] == amount + 1 ? -1 : solutions[amount];
+    }
+};
+
+class Solution322RecursionTopDown
+{
+
+    std::unordered_map<int, int> m_;
+
+    int f(vector<int>& coins, int target)
+    {
+        if (target == 0)
+        {
+            return 0;
+        }
+
+        int flag = std::numeric_limits<int>::max();
+        if (target < 0)
+        {
+            return flag;
+        }
+
+        if (m_.contains(target))
+        {
+            return m_[target];
+        }
+
+        int min_coins = flag;
+        for (int coin : coins)
+        {
+            int new_target = target - coin;
+            int res = f(coins, new_target);
+            if (res != flag)
+            { // Ensure valid path
+                min_coins = min(min_coins, 1 + res);
+            }
+        }
+
+        m_[target] = min_coins;
+        return min_coins;
+    }
+
+public:
+    int coinChange(vector<int>& coins, int amount)
+    {
+        int flag = std::numeric_limits<int>::max();
+        int min_change = f(coins, amount);
+        return (min_change == flag) ? -1 : min_change;
     }
 };
