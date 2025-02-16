@@ -41,7 +41,7 @@ public:
             {
                 return false;
             }
-            adj[p[0]].push_back(p[1]);
+            adj[p[1]].push_back(p[0]);
         }
         std::unordered_set<int> courses_in_path; 
         std::vector<bool> completed(numCourses, false);
@@ -54,5 +54,56 @@ public:
             }
         }
         return true;
+    }
+};
+
+
+class Solution207BFS {
+ 
+
+public:
+
+
+    bool canFinish(int numCourses, 
+                   vector<vector<int>>& prerequisites) 
+    {
+        std::vector<std::vector<int>> adj(numCourses);
+        std::vector<int> node_degrees(numCourses, 0);
+        for(const auto& p :prerequisites)
+        {
+            if (p[0] == p[1])
+            {
+                return false;
+            }
+            adj[p[1]].push_back(p[0]);
+            node_degrees[p[0]]++;
+        }
+
+
+        std::queue<int> q;
+        for(int i=0; i < numCourses;++i)
+        {
+            if(node_degrees[i]==0)
+            {
+                q.push(i);
+            }
+        }
+
+        int counter = 0;
+        while(!q.empty())
+        {
+            const auto n = q.front();
+            q.pop();
+            counter++;
+            for(const auto& neighbour: adj[n])
+            {
+                node_degrees[neighbour]--;
+                if(node_degrees[neighbour]==0)
+                {
+                    q.push(neighbour);
+                }
+            }
+        }
+        return counter == numCourses;
     }
 };
