@@ -16,15 +16,8 @@ public:
         int min_price = prices[0];
         for (int i = 1; i < prices.size(); ++i)
         {
-
-            if (prices[i] > min_price)
-            {
-                result = std::max(result, prices[i] - min_price);
-            }
-            else
-            {
-                min_price = prices[i];
-            }
+            min_price = std::min(min_price, prices[i]);
+            result = std::max(result, prices[i] - min_price);
         }
         return result;
     }

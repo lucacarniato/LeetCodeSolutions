@@ -18,17 +18,15 @@ public:
             {
                 result += 1;
             }
-            const auto it = ps.find(sum - k);
-            if (ps.find(sum - k) != ps.end())
-            {
-                result += it->second;
-            }
+            result += ps[sum - k];
             ps[sum]++;
         }
 
         return result;
     }
 };
+
+
 
 class Solution560Second
 {
@@ -74,5 +72,27 @@ public:
         }
 
         return nSubArray.back();
+    }
+};
+
+
+class SolutionSecond {
+public:
+    int subarraySum(vector<int>& nums, int k) 
+    {
+
+        std::unordered_map<int,int> m;
+        m[0] = 1;
+        int current_sum = 0;
+        int result = 0;
+        for(int i=0; i < nums.size();++i)
+        {
+            current_sum += nums[i];
+            int diff = current_sum - k;
+            result +=  m[diff] ;
+            m[current_sum] = 1 + m[current_sum];
+        }
+        return result;
+        
     }
 };

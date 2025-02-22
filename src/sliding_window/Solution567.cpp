@@ -5,65 +5,72 @@ class Solution567
 public:
     bool checkInclusion(std::string s1, std::string s2)
     {
-        if (s1.size() > s2.size())
+        if (s2.size() < s1.size())
         {
             return false;
         }
 
-        constexpr int vocabulary_size = 26;
-        std::array<int, vocabulary_size> s1f, s2f;
-
-        for (size_t i = 0; i < s1.size(); ++i)
+        const int vocabulary_size = 26;
+        std::vector<int> s1_freq(vocabulary_size, 0);
+        std::vector<int> s2_freq(vocabulary_size, 0);
+        for (int i = 0; i < s1.size(); ++i)
         {
-            size_t pos = s1[i] - 'a';
-            s1f[pos] += 1;
-            pos = s2[i] - 'a';
-            s2f[pos] += 1;
+            auto index = s1[i] - 'a';
+            s1_freq[index]++;
+            index = s2[i] - 'a';
+            s2_freq[index]++;
         }
 
-        // Count matches
-        int matches = 0;
+        int num_matches = 0;
         for (int i = 0; i < vocabulary_size; ++i)
         {
-            if (s1f[i] == s2f[i])
+            if (s1_freq[i] == s2_freq[i])
             {
-                matches++;
+                num_matches++;
             }
         }
 
-        // Slide the window over s2
-        int l = 0;
-        for (size_t r = s1.size(); r < s2.size(); ++r)
+        if (num_matches == vocabulary_size)
         {
-            if (matches == vocabulary_size)
+            return true;
+        }
+
+        int l = 0;
+        for (int r = s1.size(); r < s2.size(); ++r)
+        {
+            if (num_matches == vocabulary_size)
+            {
                 return true;
-
-            // Add the new character to the window
-            int rightChar = s2[r] - 'a';
-            s2f[rightChar]++;
-            if (s2f[rightChar] == s1f[rightChar])
-            {
-                matches++;
-            }
-            else if (s2f[rightChar] == s1f[rightChar] + 1)
-            {
-                matches--;
             }
 
-            // Remove the leftmost character from the window
-            int leftChar = s2[l] - 'a';
-            s2f[leftChar]--;
-            if (s2f[leftChar] == s1f[leftChar])
+            // right part
+            auto index = s2[r] - 'a';
+            if (s2_freq[index] == s1_freq[index])
             {
-                matches++;
+                num_matches--;
             }
-            else if (s2f[leftChar] == s1f[leftChar] - 1)
+
+            s2_freq[index]++;
+            if (s2_freq[index] == s1_freq[index])
             {
-                matches--;
+                num_matches++;
             }
+
+            // left part
+            index = s2[l] - 'a';
+            if (s2_freq[index] == s1_freq[index])
+            {
+                num_matches--;
+            }
+            s2_freq[index]--;
+
+            if (s2_freq[index] == s1_freq[index])
+            {
+                num_matches++;
+            }
+
             l++;
         }
-
-        return matches == vocabulary_size;
+        return num_matches == vocabulary_size;
     }
 };
