@@ -1,3 +1,61 @@
+class Solution684TopologicalSort {
+
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) 
+    {
+        int n = edges.size();
+        std::vector<int> degree(n + 1);
+        std::vector<std::vector<int>> adj(n + 1);
+        for(int i=0; i < edges.size();++i)
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+            degree[u]++;
+            degree[v]++;
+        }
+
+        std::queue<int> q;
+        for(int i=0; i < n + 1;++i)
+        {
+            if(degree[i]==1)
+            {
+                q.push(i);
+            }
+        }        
+
+        while(!q.empty())
+        {
+            const auto n = q.front();
+            q.pop();
+            degree[n]--;
+
+            for(int i=0; i < adj[n].size();++i)
+            {
+                const auto nei = adj[n][i];
+                degree[nei]--;
+                if(degree[nei]==1)
+                {
+                    q.push(nei);
+                }
+            }
+        }
+        for(int i=edges.size() -1; i >= 0;--i)
+        {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            if(degree[u] > 0 && degree[v] > 0)
+            {
+                return {u,v};
+            }
+        
+        }
+        return {};  
+    }
+};
+
+
 class SolutionUnionFind {
 
     std::vector<int> parents_;
