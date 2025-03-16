@@ -1,6 +1,6 @@
 class Solution323 {
 public:
-    int countComponents(int n, vector<vector<int>>& edges) 
+    int countComponents(int n, std::vector<std::vector<int>>& edges) 
     {
         std::vector<std::vector<int>> adj(n);
         for(int i=0; i < edges.size();++i)
